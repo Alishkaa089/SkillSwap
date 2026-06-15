@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { notificationsAPI } from '../services/api'
+import { useAuth } from '../context/AuthContext'
 import { Bell, Check, CheckCheck, Trash2 } from 'lucide-react'
 import toast from 'react-hot-toast'
 
@@ -9,11 +10,13 @@ const TYPE_ICONS = {
 }
 
 export default function NotificationsPage() {
+  const { user } = useAuth()
   const [notifs, setNotifs] = useState([])
   const [loading, setLoading] = useState(true)
   const [showUnreadOnly, setShowUnreadOnly] = useState(false)
 
   const load = (unreadOnly) => {
+    if (!user) { setLoading(false); return }
     setLoading(true)
     const req = unreadOnly ? notificationsAPI.unread() : notificationsAPI.list()
     req.then(({ data }) => setNotifs(data.results || data))

@@ -100,6 +100,7 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "Bacariq Mubadiləsi Platformasi - Full API Documentation",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
+    "DISABLE_ERRORS_AND_WARNINGS": True,
 }
 
 CORS_ALLOW_ALL_ORIGINS = True

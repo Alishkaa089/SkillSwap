@@ -128,8 +128,11 @@ export default function ProfilePage() {
           <div className="flex gap-2">
             {isMe ? (
               <Link to="/edit-profile" className="btn-secondary text-sm">Profili redaktə et</Link>
-            ) : me && (
-              <button onClick={toggleFollow}
+            ) : (
+              <button onClick={() => {
+                if (!me) { toast.error('Zəhmət olmasa əvvəlcə daxil olun'); return }
+                toggleFollow()
+              }}
                 className={`text-sm px-4 py-2 rounded-lg font-medium transition-colors ${isFollowing ? 'btn-secondary' : 'btn-primary'}`}>
                 {isFollowing ? 'İzlənilir' : 'İzlə'}
               </button>

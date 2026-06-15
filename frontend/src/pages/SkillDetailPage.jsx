@@ -112,7 +112,9 @@ export default function SkillDetailPage() {
                 <Repeat2 size={16} /> Swap təklif et
               </button>
             ) : (
-              <Link to="/login" className="btn-primary">Giriş et</Link>
+              <button onClick={() => toast.error('Zəhmət olmasa əvvəlcə daxil olun')} className="btn-primary flex items-center gap-1.5">
+                <Repeat2 size={16} /> Swap təklif et
+              </button>
             )}
           </div>
         </div>

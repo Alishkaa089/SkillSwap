@@ -24,6 +24,7 @@ export default function SwapsPage() {
   const [stats, setStats] = useState(null)
 
   const load = () => {
+    if (!user) { setLoading(false); return }
     setLoading(true)
     const req = tab === 'incoming' ? swapsAPI.incoming() : swapsAPI.outgoing()
     req.then(({ data }) => setSwaps(data.results || data))

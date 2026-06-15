@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { skillsAPI, categoriesAPI } from '../services/api'
+import { useAuth } from '../context/AuthContext'
 import toast from 'react-hot-toast'
 import { Upload } from 'lucide-react'
 
 export default function CreateSkillPage() {
+  const { user } = useAuth()
   const navigate = useNavigate()
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(false)
@@ -27,6 +29,7 @@ export default function CreateSkillPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!user) { toast.error('Zəhmət olmasa əvvəlcə daxil olun'); return }
     setLoading(true)
     try {
       const fd = new FormData()

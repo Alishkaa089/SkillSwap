@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { skillsAPI, categoriesAPI } from '../services/api'
+import { useAuth } from '../context/AuthContext'
 import { Save } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 export default function EditSkillPage() {
+  const { user } = useAuth()
   const { slug } = useParams()
   const navigate = useNavigate()
   const [categories, setCategories] = useState([])
@@ -35,6 +37,7 @@ export default function EditSkillPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!user) { toast.error('Zəhmət olmasa əvvəlcə daxil olun'); return }
     if (!form.title.trim()) { toast.error('Başlıq tələb olunur.'); return }
     setSaving(true)
     try {

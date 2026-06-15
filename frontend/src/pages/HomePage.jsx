@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { skillsAPI, categoriesAPI } from '../services/api'
+import { useAuth } from '../context/AuthContext'
 import SkillCard from '../components/common/SkillCard'
 import { Repeat2, TrendingUp, Users, Star, ArrowRight } from 'lucide-react'
+import toast from 'react-hot-toast'
 
 export default function HomePage() {
+  const { user } = useAuth()
   const [trending, setTrending] = useState([])
   const [categories, setCategories] = useState([])
   const [stats, setStats] = useState(null)
@@ -99,9 +102,15 @@ export default function HomePage() {
         <p className="text-blue-100 mb-6 max-w-md mx-auto">
           Bildiklərin başqasına lazım ola bilər. Bacarığını əlavə et, mübadiləyə başla.
         </p>
-        <Link to="/create-skill" className="inline-flex items-center gap-2 bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors">
-          Bacarıq əlavə et <ArrowRight size={18} />
-        </Link>
+        {user ? (
+          <Link to="/create-skill" className="inline-flex items-center gap-2 bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors">
+            Bacarıq əlavə et <ArrowRight size={18} />
+          </Link>
+        ) : (
+          <button onClick={() => toast.error('Zəhmət olmasa əvvəlcə daxil olun')} className="inline-flex items-center gap-2 bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
+            Bacarıq əlavə et <ArrowRight size={18} />
+          </button>
+        )}
       </section>
     </div>
   )

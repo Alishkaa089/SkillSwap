@@ -20,6 +20,7 @@ export default function EditProfilePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!user) { toast.error('Zəhmət olmasa əvvəlcə daxil olun'); return }
     setSaving(true)
     try {
       const fd = new FormData()

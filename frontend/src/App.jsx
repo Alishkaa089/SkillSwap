@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { AuthProvider, useAuth } from './context/AuthContext'
+import { AuthProvider } from './context/AuthContext'
 import Layout from './components/layout/Layout'
 
 import HomePage from './pages/HomePage'
@@ -19,12 +19,6 @@ import FeedPage from './pages/FeedPage'
 import CategoryDetailPage from './pages/CategoryDetailPage'
 import ReviewsPage from './pages/ReviewsPage'
 
-function PrivateRoute({ children }) {
-  const { user, loading } = useAuth()
-  if (loading) return <div className="flex items-center justify-center h-screen"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" /></div>
-  return user ? children : <Navigate to="/login" replace />
-}
-
 function AppRoutes() {
   return (
     <Layout>
@@ -38,14 +32,14 @@ function AppRoutes() {
         <Route path="/leaderboard" element={<LeaderboardPage />} />
         <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/users/:id" element={<ProfilePage />} />
-        <Route path="/create-skill" element={<PrivateRoute><CreateSkillPage /></PrivateRoute>} />
-        <Route path="/edit-skill/:slug" element={<PrivateRoute><EditSkillPage /></PrivateRoute>} />
-        <Route path="/edit-profile" element={<PrivateRoute><EditProfilePage /></PrivateRoute>} />
-        <Route path="/swaps" element={<PrivateRoute><SwapsPage /></PrivateRoute>} />
-        <Route path="/swaps/:id" element={<PrivateRoute><SwapDetailPage /></PrivateRoute>} />
-        <Route path="/notifications" element={<PrivateRoute><NotificationsPage /></PrivateRoute>} />
-        <Route path="/feed" element={<PrivateRoute><FeedPage /></PrivateRoute>} />
-        <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
+        <Route path="/create-skill" element={<CreateSkillPage />} />
+        <Route path="/edit-skill/:slug" element={<EditSkillPage />} />
+        <Route path="/edit-profile" element={<EditProfilePage />} />
+        <Route path="/swaps" element={<SwapsPage />} />
+        <Route path="/swaps/:id" element={<SwapDetailPage />} />
+        <Route path="/notifications" element={<NotificationsPage />} />
+        <Route path="/feed" element={<FeedPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Layout>

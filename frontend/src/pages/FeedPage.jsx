@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { followsAPI } from '../services/api'
+import { useAuth } from '../context/AuthContext'
 import SkillCard from '../components/common/SkillCard'
 import { Rss, Users } from 'lucide-react'
 
 export default function FeedPage() {
+  const { user } = useAuth()
   const [skills, setSkills] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    if (!user) { setLoading(false); return }
     followsAPI.feed()
       .then(({ data }) => setSkills(data.results || data))
       .catch(() => {})

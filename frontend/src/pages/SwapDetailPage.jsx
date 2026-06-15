@@ -22,6 +22,7 @@ export default function SwapDetailPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    if (!user) { setLoading(false); return }
     swapsAPI.detail(id)
       .then(({ data }) => setSwap(data))
       .catch(() => navigate('/swaps'))

@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide browser default password toggle (conflicts with custom eye icon) */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-webkit-textfield-decoration-container {
+  display: none;
+}
+
 @layer base {
   * { box-sizing: border-box; }
   body {
