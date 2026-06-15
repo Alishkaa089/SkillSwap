@@ -13,6 +13,10 @@ export default defineConfig({
       '/media': {
         target: 'http://localhost:8000',
         changeOrigin: true,
+      },
+      '/admin': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
       }
     }
   }
